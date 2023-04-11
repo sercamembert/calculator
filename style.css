@@ -64,3 +64,7 @@ html{
 .number{
     background-color: rgb(96, 96, 174);
 }
+sup{
+    font-size: 20px;
+    transform: translateY(-10px);
+}
