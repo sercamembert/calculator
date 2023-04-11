@@ -75,17 +75,23 @@ changeSymbol.addEventListener('click',()=>{
 })
 
 pow.addEventListener('click',()=>{
-    displayDownTemp = String(Math.pow(parseFloat(displayDownTemp),2));
+    let powValue = Math.pow(parseFloat(displayDownTemp),2)
+    if(isNaN(powValue)){
+        displayDownTemp = "0";
+    }else{
+        displayDownTemp = String(powValue);
+    }
     changeDisplayDown();
     displayUp.textContent = "0";
     displayUpTemp = "";
 })
 
 sqrt.addEventListener('click',()=>{
-    if(parseFloat(displayDownTemp)<0){
+    let sqrtValue = Math.sqrt(parseFloat(displayDownTemp));
+    if(isNaN(sqrtValue)){
         displayDownTemp = "0";
     }else{
-        displayDownTemp = String(Math.sqrt(parseFloat(displayDownTemp)));
+        displayDownTemp = String(sqrtValue);
     }
     changeDisplayDown();
     displayUp.textContent = "0";
@@ -133,6 +139,7 @@ function functionClear(){
     action = "";
     displayDown.textContent = "0";
     displayUp.textContent = "0";
+    displayDown.setAttribute('style','font-size:40px');
 }
 
 function changeDisplayDown(){
