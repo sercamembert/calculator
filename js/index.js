@@ -20,6 +20,7 @@ const actions = document.querySelectorAll('.action');
 const displayUp = document.querySelector('.display-up');
 const displayDown = document.querySelector('.display-down');
 
+//main variables
 let displayDownTemp = "";
 let displayUpTemp = "";
 let action = "";
@@ -28,13 +29,10 @@ numbers.forEach(box =>{
     box.addEventListener('click',(event)=>{
         let boxValue = event.target.getAttribute('value');
         displayDownTemp+=boxValue;
-        if(displayDownTemp.length >=17){
-            displayDown.setAttribute('style','font-size:17px');
-        }
         if(displayDownTemp.charAt(0) == "0" && displayDownTemp.length>1){
             displayDownTemp = displayDownTemp.slice(1);
         }
-        displayDown.textContent = displayDownTemp;   
+        changeDisplayDown();
     })
 })
 
@@ -63,7 +61,7 @@ clear.addEventListener('click',functionClear);
 comma.addEventListener('click',()=>{
     if(!displayDownTemp.includes('.')){
         displayDownTemp+="." ;
-        displayDown.textContent = displayDownTemp;
+        changeDisplayDown();
     }
 })
 
@@ -73,12 +71,12 @@ changeSymbol.addEventListener('click',()=>{
     }else{
         displayDownTemp = "-" + displayDownTemp;
     }
-    displayDown.textContent = displayDownTemp;
+    changeDisplayDown();
 })
 
 pow.addEventListener('click',()=>{
     displayDownTemp = String(Math.pow(parseFloat(displayDownTemp),2));
-    displayDown.textContent = displayDownTemp;
+    changeDisplayDown();
     displayUp.textContent = "0";
     displayUpTemp = "";
 })
@@ -89,7 +87,7 @@ sqrt.addEventListener('click',()=>{
     }else{
         displayDownTemp = String(Math.sqrt(parseFloat(displayDownTemp)));
     }
-    displayDown.textContent = displayDownTemp;
+    changeDisplayDown();
     displayUp.textContent = "0";
     displayUpTemp = "";
 })
@@ -99,7 +97,7 @@ function checkAction(action){
         action = "";
         displayUp.textContent = "0";
         displayDownTemp = String(functionAdd(displayUpTemp,displayDownTemp)) ;
-        displayDown.textContent = displayDownTemp;
+        changeDisplayDown();
         displayUpTemp = "";
         return true;
     }
@@ -107,7 +105,7 @@ function checkAction(action){
         action = "";
         displayUp.textContent = "0";
         displayDownTemp = String(functionMinus(displayUpTemp,displayDownTemp));
-        displayDown.textContent = displayDownTemp;
+        changeDisplayDown();
         displayUpTemp = "";
         return true;
     }
@@ -115,7 +113,7 @@ function checkAction(action){
         action = "";
         displayUp.textContent = "0";
         displayDownTemp = String(functionDivide(displayUpTemp,displayDownTemp));
-        displayDown.textContent = displayDownTemp;
+        changeDisplayDown();
         displayUpTemp = "";
         return true;
     }
@@ -123,53 +121,11 @@ function checkAction(action){
         action = "";
         displayUp.textContent = "0";
         displayDownTemp = String(functionMultiply(displayUpTemp,displayDownTemp)) ;
-        displayDown.textContent = displayDownTemp;
+        changeDisplayDown();
         displayUpTemp = "";
         return true;
     }
 }
-
-// function functionAdd(el1,el2){
-//     el1 = parseFloat(el1);
-//     el2 = parseFloat(el2);
-//     if(isNaN(el1) || isNaN(el2)){
-//         return 0;
-//     }else{
-//         return el1 +el2;   
-//     }
-
-// }
-
-// function functionMinus(el1,el2){
-//     el1 = parseFloat(el1);
-//     el2 = parseFloat(el2);
-//     if(isNaN(el1) || isNaN(el2)){
-//         return 0;
-//     }else{
-//         return el1 -el2;
-//     }
-
-// }
-
-// function functionDivide(el1,el2){
-//     el1 = parseFloat(el1);
-//     el2 = parseFloat(el2);
-//     if(isNaN(el1) || isNaN(el2) || el1 == 0 || el2 == 0){
-//         return 0;
-//     }else{
-//         return el1 / el2;
-//     }
-// }
-
-// function functionMultiply(el1,el2){
-//     el1 = parseFloat(el1);
-//     el2 = parseFloat(el2);
-//     if(isNaN(el1) || isNaN(el2)){
-//         return 0;
-//     }else{
-//         return el1 * el2;
-//     }
-// }
 
 function functionClear(){
     displayDownTemp = "";
@@ -177,6 +133,15 @@ function functionClear(){
     action = "";
     displayDown.textContent = "0";
     displayUp.textContent = "0";
+}
+
+function changeDisplayDown(){
+    if(displayDownTemp.length >=17){
+        displayDown.setAttribute('style','font-size:17px');
+    }else{
+        displayDown.setAttribute('style','font-size:40px');
+    }
+    return displayDown.textContent = displayDownTemp;
 }
 
 
